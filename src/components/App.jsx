@@ -1,37 +1,77 @@
-import initialQuizItems from '../quiz-items.json';
+import { Component } from 'react';
 import { QuizForm } from './QuizForm/QuizForm';
 import { QuizList } from './QuizList/QuizList';
 import { SearchBar } from './SearchBar';
 import { GlobalStyle } from './GlobalStyle';
 import { Layout } from './Layout';
-import { Component } from 'react';
-import { nanoid } from 'nanoid';
+import { createQuiz, deleteQiuzById, fetchQiuzzes } from 'api';
 
 export class App extends Component {
   state = {
-    quizItems: initialQuizItems,
+    quizItems: [],
+    loading: false,
+    error: false,
     filters: {
       topic: '',
       level: 'all',
     },
   };
 
-  addQuiz = newQuiz => {
-    this.setState(prevState => ({
-      quizItems: [
-        ...prevState.quizItems,
-        {
-          id: nanoid(),
-          ...newQuiz,
-        },
-      ],
-    }));
+  async componentDidMount() {
+    const savedFilters = localStorage.getItem('quiz-filters');
+    if (savedFilters !== null) {
+      this.setState({
+        filters: JSON.parse(savedFilters),
+      });
+    }
+    try {
+      this.setState({ loading: true, error: false });
+      const quizzes = await fetchQiuzzes();
+      this.setState({ quizItems: quizzes });
+    } catch (error) {
+      this.setState({ error: true });
+      console.log('Error');
+    } finally {
+      this.setState({ loading: false });
+    }
+  }
+
+  componentDidUpdate(prevProp, prevState) {
+    if (prevState.filters !== this.state.filters) {
+      localStorage.setItem('quiz-filters', JSON.stringify(this.state.filters));
+    }
+  }
+
+  addQuiz = async newQuiz => {
+    try {
+      this.setState({ loading: true, error: false });
+      const addedQuiz = await createQuiz(newQuiz);
+      this.setState(prevState => ({
+        quizItems: [...prevState.quizItems, addedQuiz],
+      }));
+    } catch (error) {
+      this.setState({ error: true });
+      console.log('Error');
+    } finally {
+      this.setState({ loading: false });
+    }
   };
 
-  deleteQuiz = quizId => {
-    this.setState(prevState => ({
-      quizItems: prevState.quizItems.filter(quiz => quiz.id !== quizId),
-    }));
+  deleteQuiz = async quizId => {
+    try {
+      this.setState({ loading: true, error: false });
+      const deletedQuiz = await deleteQiuzById(quizId);
+      this.setState(prevState => ({
+        quizItems: prevState.quizItems.filter(
+          quiz => quiz.id !== deletedQuiz.id
+        ),
+      }));
+    } catch (error) {
+      this.setState({ error: true });
+      console.log('Error');
+    } finally {
+      this.setState({ loading: false });
+    }
   };
 
   changeLevelFilter = newLevel => {
@@ -52,6 +92,15 @@ export class App extends Component {
     }));
   };
 
+  resetFilters = () => {
+    this.setState({
+      filters: {
+        topic: '',
+        level: 'all',
+      },
+    });
+  };
+
   getVisibleItems = () => {
     const { quizItems, filters } = this.state;
     return quizItems.filter(quiz => {
@@ -66,7 +115,7 @@ export class App extends Component {
   };
 
   render() {
-    const { filters } = this.state;
+    const { filters, loading, error } = this.state;
     const visibleItems = this.getVisibleItems();
     return (
       <Layout>
@@ -76,8 +125,13 @@ export class App extends Component {
           topic={filters.topic}
           onChangeLevel={this.changeLevelFilter}
           onChangeTopic={this.changeTopicFilter}
+          onReset={this.resetFilters}
         />
-        <QuizList items={visibleItems} onDelete={this.deleteQuiz} />
+        {loading && <div>Loding...</div>}
+        {error && !loading && <div>Error</div>}
+        {visibleItems.length > 0 && (
+          <QuizList items={visibleItems} onDelete={this.deleteQuiz} />
+        )}
         <GlobalStyle />
       </Layout>
     );
