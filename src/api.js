@@ -7,6 +7,11 @@ export const fetchQiuzzes = async () => {
   return data;
 };
 
+export const fetchQiuzById = async (quizId) => {
+  const { data } = await axios.get(`/quizzes/${quizId}`);
+  return data;
+};
+
 export const deleteQiuzById = async quizId => {
   const { data } = await axios.delete(`/quizzes/${quizId}`);
   return data;

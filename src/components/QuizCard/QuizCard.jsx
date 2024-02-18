@@ -1,12 +1,14 @@
+import { Link, useLocation } from 'react-router-dom';
 import { BtnDel, MetaWrapper, Text, Topic, Wrapper } from './QuizCard.styled';
 
 export const QuizCard = ({
   quiz: { id, topic, level, time, questions },
   onDelete,
 }) => {
+  const location = useLocation();
   return (
     <Wrapper level={level}>
-      <Topic>{topic}</Topic>
+      <Link to={`/quizzes/${id}`} state={{from: location}}><Topic>{topic}</Topic></Link>
       <MetaWrapper>
         <Text>
           <b>Level:</b> {level}
@@ -18,9 +20,7 @@ export const QuizCard = ({
           <b>Questions:</b> {questions}
         </Text>
       </MetaWrapper>
-      <BtnDel onClick={() => onDelete(id)}>
-        Delete
-      </BtnDel>
+      <BtnDel onClick={() => onDelete(id)}>Delete</BtnDel>
     </Wrapper>
   );
 };
