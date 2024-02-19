@@ -1,6 +1,7 @@
 import { deleteQiuzById, fetchQiuzzes } from 'api';
+import { Loader } from 'components/Loader';
 import { QuizList } from 'components/QuizList/QuizList';
-import { SearchBar } from 'components/SearchBar';
+import { SearchBar } from 'components/SearchBar/SearchBar';
 import { useQueryParams } from 'hooks/useQueryParams';
 import { useEffect, useState } from 'react';
 
@@ -57,7 +58,7 @@ export default function QuizzesPage() {
   return (
     <div>
       <SearchBar/>
-      {loading && <div>Loding...</div>}
+      {loading && <Loader/>}
       {error && !loading && <div>Error</div>}
       {visibleItems.length > 0 && (
         <QuizList items={visibleItems} onDelete={deleteQuiz} />

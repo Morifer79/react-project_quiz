@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const getBorderColor = p => {
+const getTextColor = p => {
   switch (p.level) {
     case 'beginner':
       return `${p.theme.colors.beginner}`;
@@ -14,34 +14,74 @@ const getBorderColor = p => {
 };
 
 export const Wrapper = styled.div`
-  padding: 8px;
-  border: 1px solid ${getBorderColor};
-  border-radius: 6px;
+  height: 200px;
+  width: 300px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0px 30px;
+  outline: 0px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
 
 export const Topic = styled.h2`
-  margin: 0;
-  margin-bottom: 12px;
+  margin-block-end: 10px;
 `;
 
 export const MetaWrapper = styled.div`
-  display: flex;
-  gap: 5px;
+  height: 130px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 0px 30px 0px 0px;
+  padding: 5px 10px;
+  margin: 0px 10px;
+  top: 10px;
+  width: 280px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  position: relative;
 `;
 
 export const Text = styled.p``;
 
+export const TextLevel = styled.p`
+  margin-block-end: 10px;
+
+  span {
+    color: ${getTextColor};
+    border: 1px solid ${getTextColor};
+    border-radius: 6px;
+    padding-inline: 6px;
+  }
+`;
+
+export const BtnWrapper = styled.div`
+  padding: 5px 10px;
+  width: 280px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 0px 0px 0px 30px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  position: absolute;
+  transform: translate(10px, 20px);
+  span{
+    padding-right: 180px;
+    color: transparent;
+  }
+`;
+
 export const BtnDel = styled.button`
-  margin: 0;
+  display: block;
+  margin-left: auto;
   padding: 4px;
   color: #000;
-  border: 1px solid #000;
+  border: none;
   background-color: transparent;
   font-weight: 600;
-  border-radius: 6px;
 
-  &:hover{
-    color: #fff;
-    background-color: #000;
+  &:hover {
+    color: red;
+    span{
+    color: red;
   }
+  }
+  /* &:hover span{
+    color: red;
+  } */
 `;

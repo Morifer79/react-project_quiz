@@ -1,4 +1,5 @@
 import { createQuiz } from 'api';
+import { Loader } from 'components/Loader';
 import { QuizForm } from 'components/QuizForm/QuizForm';
 import { useState } from 'react';
 
@@ -21,7 +22,7 @@ export default function CreateQuizPage() {
   return (
     <div>
       <QuizForm onAdd={addQuiz} />
-      {loading && <div>Loding...</div>}
+      {loading && <Loader/>}
       {error && !loading && <div>Error</div>}
     </div>
   );

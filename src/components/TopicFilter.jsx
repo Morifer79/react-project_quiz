@@ -6,7 +6,7 @@ export const TopicFilter = () => {
   return (
     <input
       type="text"
-      placeholder="Topic frilter"
+      placeholder="Topic filter"
       value={topic}
       onChange={e => changeTopic(e.target.value)}
     />

@@ -1,4 +1,5 @@
 import { fetchQiuzById } from 'api';
+import { Loader } from 'components/Loader';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 
@@ -30,7 +31,7 @@ export default function QuizDetailsPage() {
     <div>
       <Link to={location?.state?.from ?? '/quizzes'}>Back to quizzes</Link>
       {quiz && <div>{quiz.topic}</div>}
-      {loading && <div>Loding...</div>}
+      {loading && <Loader/>}
       {error && !loading && <div>Error</div>}
     </div>
   );

@@ -1,4 +1,3 @@
-import { GlobalStyle } from './GlobalStyle';
 import { Route, Routes } from 'react-router-dom';
 import QuizzesPage from 'pages/QuizePage';
 import CreateQuizPage from 'pages/CreateQuizPage';
@@ -15,7 +14,6 @@ export const App = () => {
           <Route path="quizzes/:quizId" element={<QuizDetailsPage />} />
         </Route>
       </Routes>
-      <GlobalStyle />
     </>
   );
 };
