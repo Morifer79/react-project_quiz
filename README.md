@@ -3,8 +3,7 @@
 ![Quiz](/quiz-preview.jpg)  
 
 This project was created using [Create React App](https://github.com/facebook/create-react-app).  
-Web application for browsing and managing car rentals.  
-Users can view a list of available cars, filter them, and mark their favorites. 
+ A simple app for creating quizzes or todos.  
 
 ## 𝔽𝕖𝕒𝕥𝕦𝕣𝕖𝕤 𝕒𝕟𝕕 𝕋𝕖𝕔𝕙𝕟𝕠𝕝𝕠𝕘𝕚𝕖𝕤 ᎓    
 
@@ -15,9 +14,7 @@ Users can view a list of available cars, filter them, and mark their favorites.
   <img src="https://github.com/devicons/devicon/blob/master/icons/redux/redux-original.svg" title="Redux" alt="Redux" width="40" height="40"/>&nbsp;
   <img src="https://github.com/devicons/devicon/blob/master/icons/npm/npm-original-wordmark.svg" title="npm" alt="npm" width="40" height="40"/>&nbsp;
   <img src="https://github.com/devicons/devicon/blob/master/icons/figma/figma-original.svg" title="Figma" alt="Figma" width="40" height="40"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/vscode/vscode-original-wordmark.svg" title="VSCode" alt="VSCode" width="40" height="40"/>&nbsp;  
-
-  A simple app for creating quizzes or todos.  
+  <img src="https://github.com/devicons/devicon/blob/master/icons/vscode/vscode-original-wordmark.svg" title="VSCode" alt="VSCode" width="40" height="40"/>&nbsp;   
 
 ※ Global styles are applied.  
 ※ Theming was used.  
