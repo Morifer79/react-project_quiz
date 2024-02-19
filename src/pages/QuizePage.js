@@ -4,18 +4,17 @@ import { QuizList } from 'components/QuizList/QuizList';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { useQueryParams } from 'hooks/useQueryParams';
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 export default function QuizzesPage() {
   const [quizItems, setQuizItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const {topic, level} = useQueryParams();  
+  const { topic, level } = useQueryParams();
 
   const visibleItems = quizItems.filter(quiz => {
-    const hasTopic = quiz.topic
-      .toLowerCase()
-      .includes(topic.toLowerCase());
+    const hasTopic = quiz.topic.toLowerCase().includes(topic.toLowerCase());
     if (level === 'all') {
       return hasTopic;
     }
@@ -30,9 +29,18 @@ export default function QuizzesPage() {
       setQuizItems(prevItems =>
         prevItems.filter(quiz => quiz.id !== deletedQuiz.id)
       );
+      toast.success('The quiz has been successfully deleted!', {
+        duration: 3000,
+        position: 'top-right',
+        icon: '✅',
+      });
     } catch (error) {
       setError(true);
-      console.log('Error');
+      toast.error('Something went wrong...', {
+        duration: 3000,
+        position: 'top-right',
+        icon: '❌',
+      });
     } finally {
       setLoading(false);
     }
@@ -47,7 +55,11 @@ export default function QuizzesPage() {
         setQuizItems(quizzes);
       } catch (error) {
         setError(true);
-        console.log('Error');
+        toast.error('Something went wrong...', {
+          duration: 3000,
+          position: 'top-right',
+          icon: '❌',
+        });
       } finally {
         setLoading(false);
       }
@@ -57,9 +69,15 @@ export default function QuizzesPage() {
 
   return (
     <div>
-      <SearchBar/>
-      {loading && <Loader/>}
-      {error && !loading && <div>Error</div>}
+      <SearchBar />
+      {loading && <Loader />}
+      {error &&
+        !loading &&
+        toast.error('Something went wrong...', {
+          duration: 3000,
+          position: 'top-right',
+          icon: '❌',
+        })}
       {visibleItems.length > 0 && (
         <QuizList items={visibleItems} onDelete={deleteQuiz} />
       )}

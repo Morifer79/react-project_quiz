@@ -1,32 +1,37 @@
-import styled from "styled-components";
+import { theme } from 'components/theme';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
+  gap: ${theme.spacing(5)};
+  margin-block-end: ${theme.spacing(7.5)};
 `;
 
 export const BtnRst = styled.button`
-  padding: 0 5px;
+  padding: ${theme.spacing(4)};
   display: block;
   text-align: center;
-  width: 120px;
-  font-weight: 600;
-  padding: 6px;
-
-  background-image: linear-gradient(to right, #53868B 0%, #e0e022 51%, #53868B 100%);
   flex: 1 1 auto;
-  text-align: center;
-  transition: 0.5s;
+
+  inline-size: 288px;
+  border-radius: 0 16px 0 16px;
+  background-image: linear-gradient(
+    to right,
+    ${theme.colors.bottle} 0%,
+    ${theme.colors.sunny} 51%,
+    ${theme.colors.bottle} 100%
+  );
   background-size: 200% auto;
-  color: #000000;
-  box-shadow: 0 0 20px #000000;
+  color: ${theme.colors.sunny};
+  font-weight: 600;
+  box-shadow: 0 0 20px ${theme.colors.dark};
   border: none;
+  transition: background-position ${theme.transition}, color ${theme.transition};
+
   &:hover {
     background-position: right center;
-    
+    color: ${theme.colors.advanced};
   }
-  border-radius: 0 0 20px 20px;
 `;

@@ -1,22 +1,24 @@
 import { createGlobalStyle } from 'styled-components';
-import 'modern-normalize'; 
+import 'modern-normalize';
+import { theme } from './theme';
 
 export const GlobalStyle = createGlobalStyle`
   html {
 		box-sizing: border-box;
-		width: 100vw;
+		inline-size: 100vw;
 		overflow-x: hidden;
 	}
 
   body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    min-block-size: 100vh;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: black;
-  background: linear-gradient(80deg, #53868B, yellow);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: ${theme.colors.dark};
+    background: linear-gradient(80deg, ${theme.colors.bottle}, ${theme.colors.sunny}) no-repeat;
   }
 
   code {

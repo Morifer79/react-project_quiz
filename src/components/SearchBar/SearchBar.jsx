@@ -1,15 +1,15 @@
-import { TopicFilter } from '../TopicFilter';
-import { LevelFilter } from '../LevelFilter';
+import { TopicFilter } from '../TopicFilter/TopicFilter';
+import { LevelFilter } from '../LevelFilter/LevelFilter';
 import { useQueryParams } from 'hooks/useQueryParams';
 import { BtnRst, Container } from './SearchBar.styled';
 
 export const SearchBar = () => {
-  const {resetFilters } = useQueryParams();
+  const { resetFilters } = useQueryParams();
 
   return (
     <Container>
-      <TopicFilter/>
-      <LevelFilter/>
+      <TopicFilter />
+      <LevelFilter />
       <BtnRst onClick={resetFilters}>RESET</BtnRst>
     </Container>
   );

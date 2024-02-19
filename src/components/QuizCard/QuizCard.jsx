@@ -1,6 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
-import { BtnDel, BtnWrapper, MetaWrapper, Text, TextLevel, Topic, Wrapper } from './QuizCard.styled';
-import { FaTrashCan } from "react-icons/fa6";
+import {
+  BtnDel,
+  BtnWrapper,
+  MetaWrapper,
+  TextLevel,
+  Topic,
+  Wrapper,
+} from './QuizCard.styled';
+import { FaTrashCan } from 'react-icons/fa6';
 
 export const QuizCard = ({
   quiz: { id, topic, level, time, questions },
@@ -10,16 +17,18 @@ export const QuizCard = ({
   return (
     <Wrapper>
       <MetaWrapper>
-        <Link to={`/quizzes/${id}`} state={{from: location}}><Topic>{topic}</Topic></Link>
+        <Link to={`/quizzes/${id}`} state={{ from: location }}>
+          <Topic>{topic}</Topic>
+        </Link>
         <TextLevel level={level}>
           <b>Level:</b> <span>{level}</span>
         </TextLevel>
-        <Text>
+        <p>
           <b>Time:</b> {time}
-        </Text>
-        <Text>
+        </p>
+        <p>
           <b>Questions:</b> {questions}
-        </Text>
+        </p>
       </MetaWrapper>
       <BtnWrapper>
         <BtnDel onClick={() => onDelete(id)}>

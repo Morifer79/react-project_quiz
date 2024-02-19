@@ -7,7 +7,7 @@ export const fetchQiuzzes = async () => {
   return data;
 };
 
-export const fetchQiuzById = async (quizId) => {
+export const fetchQiuzById = async quizId => {
   const { data } = await axios.get(`/quizzes/${quizId}`);
   return data;
 };
